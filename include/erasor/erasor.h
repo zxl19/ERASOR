@@ -50,12 +50,11 @@ public:
         nh.param("/erasor/max_h", max_h, 3.0);
         nh.param("/erasor/min_h", min_h, 0.0);
         nh.param("/erasor/th_bin_max_h", th_bin_max_h, 0.39);
-        nh.param("/erasor/th_ground_retrieval_h", th_ground_retrieval_h, 0.75);
         nh.param("/erasor/scan_ratio_threshold", scan_ratio_threshold, 0.22);
         nh.param("/erasor/num_lowest_pts", num_lowest_pts, 5);
         nh.param("/erasor/minimum_num_pts", minimum_num_pts, 4);
         nh.param("/erasor/rejection_ratio", rejection_ratio, 0.33);
-        nh.param("/erasor/gf_distThr", th_dist_, 0.05);
+        nh.param("/erasor/gf_dist_thr", th_dist_, 0.05);
         nh.param("/erasor/gf_iter", iter_groundfilter_, 3);
         nh.param("/erasor/gf_num_lpr", num_lprs_, 10);
         nh.param("/erasor/gf_th_seeds_height", th_seeds_heights_, 0.5);
@@ -84,7 +83,6 @@ public:
         std::cout << "max_h: " << max_h << std::endl;
         std::cout << "scan_ratio_threshold: " << scan_ratio_threshold << std::endl;
         std::cout << "th_bin_max_h: " << th_bin_max_h << std::endl;
-        std::cout << "ground_retrieval_h: " << th_ground_retrieval_h << std::endl;
         std::cout << "minimum_num_pts: " << minimum_num_pts << std::endl;
         std::cout << "rejection_ratio: " << rejection_ratio << std::endl;
         std::cout << th_dist_ << std::endl;
@@ -145,6 +143,8 @@ public:
     R_POD r_pod_curr; // R_POD of current pointcloud
     R_POD r_pod_selected; // R_POD of current pointcloud
 
+    double get_max_range();
+
 private:
     std::vector<int> DYNAMIC_CLASSES = {252, 253, 254, 255, 256, 257, 258, 259};
 
@@ -165,12 +165,10 @@ private:
 
     double min_h;
     double max_h;
-    double th_ground_retrieval_h;
     double scan_ratio_threshold;
     double th_bin_max_h;
     int    minimum_num_pts;
     double rejection_ratio;
-    double sac_dist_thr;
 
     double xy2theta(const double &x, const double &y);
 
