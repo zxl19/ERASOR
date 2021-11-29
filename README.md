@@ -1,6 +1,7 @@
 # :rainbow: ERASOR (RA-L'21 with ICRA Option)
 
-Official page of [*"ERASOR: Egocentric Ratio of Pseudo Occupancy-based Dynamic Object Removal for Static 3D Point Cloud Map Building"*](https://arxiv.org/abs/2103.04316), which is accepted by RA-L with ICRA'21 option [[Demo Video](https://www.youtube.com/watch?v=Nx27ZO8afm0)].
+Official page of [*"ERASOR: Egocentric Ratio of Pseudo Occupancy-based Dynamic Object Removal for Static 3D Point Cloud Map Building"*](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9361109), which is accepted by RA-L with ICRA'21 option 
+[[Video](https://www.youtube.com/watch?v=Nx27ZO8afm0)] [[Preprint Paper](https://arxiv.org/abs/2103.04316)] 
 
 ![overview](img/fig_overview.png)
 
@@ -21,7 +22,7 @@ Advisor: Hyun Myung (hmyung@kaist.ac.kr)
 
 ## NEWS (Recent update: Oct., 2021) 
 - An example of running ERASOR in your own env. is provided.
-    - Please refer to please refer to `src/online_map_updater/erasor_main.cpp` file and `run_erasor_in_your_env.launch` file and below [instruction](#ERASOR-in-the-Wild).
+    - Please refer to please refer to `src/offline_map_updater/erasor_main.cpp` file and `run_erasor_in_your_env.launch` file and below [instruction](#ERASOR-in-the-Wild).
 ---
 
 ## Contents
@@ -114,7 +115,7 @@ roscore # (Optional)
 roslaunch erasor mapgen.launch
 rosbag play 05_2350_to_2670_w_interval_2_node.bag
 ```
-* Then, dense map and voxelized map are auto-saved at the `save path`. Note that the dense map is used to fill corresponding labels ([HERE](#Calculate-PR/RR)). The voxelized map will be an input of step 2 as a naively accumulated map.
+* Then, dense map and voxelized map are auto-saved at the `save path`. Note that the dense map is used to fill corresponding labels. The voxelized map will be an input of step 2 as a naively accumulated map.
 
 **Step 2. Run ERASOR**
 ![erasor](img/kitti05.gif)
@@ -214,7 +215,7 @@ Satellite map                 |  Pcd map by LIO-SAM
 ![](img/demo/bongeunsa_satellite.png) |  ![](img/demo/bongeunsa_map.png)
 
 
-When **running ERASOR in your own environments**, please refer to `src/online_map_updater/erasor_main.cpp` file and `run_erasor_in_your_env.launch`.
+When **running ERASOR in your own environments**, please refer to `src/offline_map_updater/erasor_main.cpp` file and `run_erasor_in_your_env.launch`.
 
 You can learn how to set experimental setting by repeating our pre-set configurations. Please follow our instructions.
 

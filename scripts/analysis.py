@@ -3,7 +3,7 @@ from tqdm import tqdm
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from tabulate import tabulate
-DYNAMIC_CLASSES = [252, 253, 254, 255, 256, 257, 259]
+DYNAMIC_CLASSES = [252, 253, 254, 255, 256, 257, 258, 259]
 
 def intensity2labels(intensity_np):
     label = intensity_np.astype(np.uint32)
@@ -161,6 +161,7 @@ def evaluate(gt, estimate, voxelsize=0.2):
     num_estimate = count_static_and_dynamic(estimate.pc_data['intensity'])
 
     contents = []
+    # Print class-wise rejection rate
     for dyn_class in DYNAMIC_CLASSES:
         if num_gt[dyn_class] == 0:
             line = [dyn_class, "N/A", "N/A", "N/A"]
@@ -190,7 +191,7 @@ def evaluate(gt, estimate, voxelsize=0.2):
     printed_data = gt_data + est_data + [pr, rr, 2 * (pr/100) * (rr/100) / ((pr/100) + (rr/100))]
 
     print(tabulate([printed_data], headers=['# stat. pts', '# dyn. pts', '%', '# est. stat. pts', '# est. dyn. pts',
-                                            '%', 'Preservation', 'rejection', 'F1'], tablefmt='orgtbl'))
+                                            '%', 'Preservation', 'rejection', 'F1'], tablefmt='github'))
 def load_pcd(path):
     print("On loading data...")
     data = pypcd.PointCloud.from_path(path)
