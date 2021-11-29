@@ -1,4 +1,4 @@
-erasor: 
+erasor:
     max_range: 9.5
     num_rings: 8
     num_sectors: 60
@@ -16,12 +16,12 @@ erasor:
 
 
 # For mapgen
-data_dir: "/media/shapelim/UX960NVMe1/deep_express/LIO-SAM/bongeunsa_dataset"
-voxel_size: 0.075
+data_dir: "/home/zhangxl/data/ERASOR/bongeunsa_dataset"
+voxel_size: 0.2
 init_idx: 130
 interval: 2
 tf:
-     lidar2body: [0.0, 0.0, 0.0, 0, 0.0, 0.0, 1.0] # xyz q_x, q_y, q_z, q_w in order
+    lidar2body: [0.0, 0.0, 0.0, 0, 0.0, 0.0, 1.0] # xyz q_x, q_y, q_z, q_w in order
 
 verbose: true
 
