@@ -330,6 +330,7 @@ void ERASOR::get_outliers(
 // Retrieve piecewise ground!
 // Color maybe changed
 void ERASOR::compare_vois_and_revert_ground(int frame) {
+    std::cout << "====== ERASOR::compare_vois_and_revert_ground() Called! ======" << std::endl;
     jsk_recognition_msgs::PolygonArray poly_list;
     poly_list.header.frame_id = "/map";
     poly_list.header.stamp    = ros::Time::now();
@@ -436,6 +437,7 @@ void ERASOR::compare_vois_and_revert_ground(int frame) {
 // Version 3.
 // Retrieve piecewise with blocking!
 void ERASOR::compare_vois_and_revert_ground_w_block(int frame) {
+    std::cout << "====== ERASOR::compare_vois_and_revert_ground_w_block() Called! ======" << std::endl;
     jsk_recognition_msgs::PolygonArray poly_list;
     poly_list.header.frame_id = "/map";
     poly_list.header.stamp    = ros::Time::now();
@@ -612,11 +614,14 @@ bool ERASOR::has_dynamic(Bin &bin) {
 void ERASOR::get_static_estimate(
         pcl::PointCloud<pcl::PointXYZI> &arranged,
         pcl::PointCloud<pcl::PointXYZI> &complement) {
+    std::cout << "====== ERASOR::get_static_estimate() Called! ======" << std::endl;
     r_pod2pc(r_pod_selected, arranged);
+    std::cout << "====== Test Line 1 ======" << std::endl;
     arranged += ground_viz;
+    std::cout << "====== Test Line 2 ======" << std::endl;
     sensor_msgs::PointCloud2 pc2_ground = erasor_utils::cloud2msg(ground_viz);
     pub_ground.publish(pc2_ground);
-
+    std::cout << "====== Test Line 3 ======" << std::endl;
     complement = map_complement;
     sensor_msgs::PointCloud2 pc2_arranged       = erasor_utils::cloud2msg(arranged);
     sensor_msgs::PointCloud2 pc2_map_complement = erasor_utils::cloud2msg(complement);

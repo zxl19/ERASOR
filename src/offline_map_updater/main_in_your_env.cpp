@@ -180,12 +180,17 @@ int main(int argc, char **argv)
     std::cout << "[Initialization] Loading complete" << std::endl;
 
     int N = poses.size();
+    // *Hard-Coded Value
+    // Exit at the empty frame.
+    // N = 228;
     for (int i = INIT_IDX; i < N; ++i) {
         signal(SIGINT, erasor_utils::signal_callback_handler);
         if (i % INTERVAL != 0) continue;
 
         std::cout<<i<<" / "<< N<<" th operation"<<std::endl;
-        Eigen::Matrix4f targetTf4x4 = poses[i];
+        // *Hard-Coded Value
+        // Because hdl_graph_slam skipped frame 1.
+        Eigen::Matrix4f targetTf4x4 = poses[i - 1];
 
         // Current scan
         pcl::PointCloud<PointType>::Ptr srcCloud(new pcl::PointCloud<PointType>);
@@ -198,6 +203,8 @@ int main(int argc, char **argv)
         pcl::PointCloud<PointType>::Ptr ptrTransformedCloud(new pcl::PointCloud<PointType>);
         pcl::transformPointCloud(*srcCloud, *ptrTransformedCloud, targetTf4x4);
         sensor_msgs::PointCloud2 currCloudMsg = erasor_utils::cloud2msg(*ptrTransformedCloud);
+        // currCloudMsg.height = 1;
+        // currCloudMsg.width = ptrTransformedCloud->points.size();
         ScanPublisher.publish(currCloudMsg);
 
         // Set VoI

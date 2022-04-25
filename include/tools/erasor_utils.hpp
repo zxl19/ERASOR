@@ -51,9 +51,16 @@ namespace erasor_utils {
     template<typename T>
     sensor_msgs::PointCloud2 cloud2msg(pcl::PointCloud<T> cloud, std::string frame_id = "map")
     {
+        std::cout << "cloud.points.size() = " << cloud.points.size() << std::endl;
+        std::cout << "cloud.height() = " << cloud.height << std::endl;
+        std::cout << "cloud.width() = " << cloud.width << std::endl;
+        cloud.height = 0;
+        cloud.width = 0;
         sensor_msgs::PointCloud2 cloud_ROS;
         pcl::toROSMsg(cloud, cloud_ROS);
         cloud_ROS.header.frame_id = frame_id;
+        // cloud_ROS.height = 1;
+        // cloud_ROS.width = cloud.points.size();
         return cloud_ROS;
     }
 
@@ -62,6 +69,8 @@ namespace erasor_utils {
     {
         pcl::PointCloud<T> cloudresult;
         pcl::fromROSMsg(cloudmsg,cloudresult);
+        // cloudresult.height = cloudmsg.height;
+        // cloudresult.width = cloudmsg.width;
         return cloudresult;
     }
 
